@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form and Table JS</title>
+	<style>
+		body{
+		background-color:#EEEEEE;
+		font-family:sans-serif;}
+		.formDiv{
+		width:50vw;
+		margin:2rem auto;
+		padding:1rem;
+		background-color:lightblue;
+		border:0.5px dotted grey;
+		text-transform:uppercase;
+		box-sizing:border-box;
+		}
+		.formDiv form{
+		display:grid;
+		grid-template-columns:repeat(3,1fr);
+		grid-gap:1rem;	
+		}
+		form input{
+		outline:none;
+		border:1px solid grey;
+		text-transform:uppercase;
+		}
+		table{
+		width:80vw;
+		margin:0px auto;
+		background-color:lightblue;
+		border-collapse:collapse;
+		border:1px dotted grey;
+		text-align:center;
+		}
+		table td,table th{
+		width:80px;
+		}
+
+	</style>
+</head>
+<body>
+	<center><h1>WELCOME !</h1></center>
+	<div class="formDiv">
+	<form name="form-1">	
+		<lable> Name <input type = "text" name="stdName"  value="Kamran"required></lable>
+		<lable>Age <input type = "number" name="stdAge"  value="25" required></lable>
+		<lable>English <input type = "number" name="english" required max="100" value="65"></lable>
+		<lable>Science <input type = "number" name="science" required max="100" value="57"></lable>
+		<lable>History <input type = "number" name="history" required max="100" value="43"></lable>
+		<lable>Math <input type = "number" name="math" required max="100" value="74"></lable>
+		<button type="button" name="subBtn"  value="submit" onclick="getData()">submit</button>
+	</form>	
+	</div>
+	<center><h1>STUDENTS DATA</h1></center>
+	<table border="1" id="tbl">
+		<tr>
+			<th>Student Name</th>
+			<th>Student Age</th>
+			<th>English</th>
+			<th>Science</th>
+			<th>History</th>
+			<th>Math</th>
+			<th>percentage</th>
+		</tr>	
+	</table>
+	<table id="tbl1" border="1"></table>
+
+<script>
+	let data = [[],[],[],[],[],[]];
+	let countSubmit = 0;
+
+	function getData(){
+	let name=document.forms["form-1"]["stdName"].value;
+	let age=document.forms["form-1"]["stdAge"].value;
+	let english=Number(document.forms["form-1"]["english"].value);
+	let science=Number(document.forms["form-1"]["science"].value);
+	let history=Number(document.forms["form-1"]["history"].value);
+	let math=Number(document.forms["form-1"]["math"].value);
+	
+	data[0].push(name);data[1].push(age);data[2].push(english);data[3].push(science);data[4].push(history);data[5].push(math);	
+
+	let percentage = ((english+science+history+math)/400)*100;
+	countSubmit += 1;
+	let i = countSubmit-1;
+	for(;i<data[0].length;i++){
+	document.getElementById("tbl").innerHTML += "<tr></tr>";
+	for(var j=0;j<7;j++){
+	if(j<=5){
+	document.getElementById("tbl").getElementsByTagName("tr")[i+1].innerHTML += "<td>"+data[j][i]+"</td>";}
+	else{
+	document.getElementById("tbl").getElementsByTagName("tr")[i+1].innerHTML += "<td>"+percentage+"%"+"</td>";
+	}
+	
+	}
+	}
+
+	}
+</script>
+</body>
+</html>
